@@ -1,0 +1,260 @@
+
+Discarded input sections
+
+ .group         0x00000000        0xc build/startup.o
+ .group         0x00000000        0xc build/startup.o
+ .group         0x00000000        0xc build/startup.o
+ .group         0x00000000        0xc build/startup.o
+ .group         0x00000000        0xc build/startup.o
+ .group         0x00000000        0xc build/startup.o
+ .group         0x00000000        0xc build/startup.o
+ .text          0x00000000        0x0 build/startup.o
+ .data          0x00000000        0x0 build/startup.o
+ .bss           0x00000000        0x0 build/startup.o
+ .group         0x00000000        0xc build/main_led.o
+ .group         0x00000000        0xc build/main_led.o
+ .group         0x00000000        0xc build/main_led.o
+ .group         0x00000000        0xc build/main_led.o
+ .group         0x00000000        0xc build/main_led.o
+ .group         0x00000000        0xc build/main_led.o
+ .group         0x00000000        0xc build/main_led.o
+ .group         0x00000000        0xc build/main_led.o
+ .text          0x00000000        0x0 build/main_led.o
+ .data          0x00000000        0x0 build/main_led.o
+ .bss           0x00000000        0x0 build/main_led.o
+ .debug_macro   0x00000000      0xaf6 build/main_led.o
+ .debug_macro   0x00000000       0x22 build/main_led.o
+ .debug_macro   0x00000000       0x56 build/main_led.o
+ .debug_macro   0x00000000       0x6d build/main_led.o
+ .debug_macro   0x00000000      0x103 build/main_led.o
+ .debug_macro   0x00000000       0x6a build/main_led.o
+ .debug_macro   0x00000000      0x1d0 build/main_led.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00200000         xr
+RAM              0x20000000         0x00080000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/startup.o
+LOAD build/main_led.o
+START GROUP
+LOAD C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/thumb/v7e-m+dp/hard\libgcc.a
+LOAD C:/Program Files (x86)/Arm/GNU Toolchain mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+dp/hard\libc.a
+END GROUP
+                0x20080000                        _estack = (ORIGIN (RAM) + LENGTH (RAM))
+                0x00000400                        _Min_Heap_Size = 0x400
+                0x00000800                        _Min_Stack_Size = 0x800
+
+.isr_vector     0x08000000       0x40
+                0x08000000                        . = ALIGN (0x4)
+ *(.isr_vector)
+ .isr_vector    0x08000000       0x40 build/startup.o
+                0x08000000                g_pfnVectors
+                0x08000040                        . = ALIGN (0x4)
+
+.text           0x08000040      0x16c
+                0x08000040                        . = ALIGN (0x4)
+ *(.text)
+ *(.text*)
+ .text.Default_Handler
+                0x08000040        0x4 build/startup.o
+                0x08000040                DebugMon_Handler
+                0x08000040                HardFault_Handler
+                0x08000040                SysTick_Handler
+                0x08000040                PendSV_Handler
+                0x08000040                NMI_Handler
+                0x08000040                UsageFault_Handler
+                0x08000040                Default_Handler
+                0x08000040                MemManage_Handler
+                0x08000040                SVC_Handler
+                0x08000040                BusFault_Handler
+ .text.Reset_Handler
+                0x08000044       0x80 build/startup.o
+                0x08000044                Reset_Handler
+ .text.startup.main
+                0x080000c4       0xe8 build/main_led.o
+                0x080000c4                main
+ *(.glue_7)
+ .glue_7        0x080001ac        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x080001ac        0x0 linker stubs
+ *(.eh_frame)
+ *(.init)
+ *(.fini)
+                0x080001ac                        . = ALIGN (0x4)
+                0x080001ac                        _etext = .
+
+.vfp11_veneer   0x080001ac        0x0
+ .vfp11_veneer  0x080001ac        0x0 linker stubs
+
+.v4_bx          0x080001ac        0x0
+ .v4_bx         0x080001ac        0x0 linker stubs
+
+.iplt           0x080001ac        0x0
+ .iplt          0x080001ac        0x0 build/startup.o
+
+.rel.dyn        0x080001ac        0x0
+ .rel.iplt      0x080001ac        0x0 build/startup.o
+
+.rodata         0x080001ac        0x0
+                0x080001ac                        . = ALIGN (0x4)
+ *(.rodata)
+ *(.rodata*)
+                0x080001ac                        . = ALIGN (0x4)
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+
+.ARM            0x080001ac        0x0
+                0x080001ac                        __exidx_start = .
+ *(.ARM.exidx*)
+                0x080001ac                        __exidx_end = .
+
+.preinit_array  0x080001ac        0x0
+                [!provide]                        PROVIDE (__preinit_array_start = .)
+ *(.preinit_array*)
+                [!provide]                        PROVIDE (__preinit_array_end = .)
+
+.init_array     0x080001ac        0x0
+                [!provide]                        PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array*)
+                [!provide]                        PROVIDE (__init_array_end = .)
+
+.fini_array     0x080001ac        0x0
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array*)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+                0x080001ac                        _sidata = LOADADDR (.data)
+
+.data           0x20000000        0x0 load address 0x080001ac
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _sdata = .
+ *(.data)
+ *(.data*)
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _edata = .
+
+.igot.plt       0x20000000        0x0 load address 0x080001ac
+ .igot.plt      0x20000000        0x0 build/startup.o
+                0x20000000                        . = ALIGN (0x4)
+
+.bss            0x20000000        0x0 load address 0x080001ac
+                0x20000000                        _sbss = .
+                0x20000000                        __bss_start__ = _sbss
+ *(.bss)
+ *(.bss*)
+ *(COMMON)
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _ebss = .
+                0x20000000                        __bss_end__ = _ebss
+
+._user_heap_stack
+                0x20000000      0xc00 load address 0x080001ac
+                0x20000000                        . = ALIGN (0x8)
+                [!provide]                        PROVIDE (end = .)
+                [!provide]                        PROVIDE (_end = .)
+                0x20000400                        . = (. + _Min_Heap_Size)
+ *fill*         0x20000000      0x400 
+                0x20000c00                        . = (. + _Min_Stack_Size)
+ *fill*         0x20000400      0x800 
+                0x20000c00                        . = ALIGN (0x8)
+
+.ARM.attributes
+                0x00000000       0x32
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x32 build/startup.o
+ .ARM.attributes
+                0x00000032       0x32 build/main_led.o
+OUTPUT(build/led.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x00000000      0x471
+ .debug_info    0x00000000      0x15e build/startup.o
+ .debug_info    0x0000015e      0x313 build/main_led.o
+
+.debug_abbrev   0x00000000      0x21d
+ .debug_abbrev  0x00000000       0xf5 build/startup.o
+ .debug_abbrev  0x000000f5      0x128 build/main_led.o
+
+.debug_loclists
+                0x00000000       0xfe
+ .debug_loclists
+                0x00000000       0x46 build/startup.o
+ .debug_loclists
+                0x00000046       0xb8 build/main_led.o
+
+.debug_aranges  0x00000000       0x48
+ .debug_aranges
+                0x00000000       0x28 build/startup.o
+ .debug_aranges
+                0x00000028       0x20 build/main_led.o
+
+.debug_rnglists
+                0x00000000       0xd9
+ .debug_rnglists
+                0x00000000       0x1a build/startup.o
+ .debug_rnglists
+                0x0000001a       0xbf build/main_led.o
+
+.debug_macro    0x00000000     0x114d
+ .debug_macro   0x00000000       0x75 build/startup.o
+ .debug_macro   0x00000075      0xaf6 build/startup.o
+ .debug_macro   0x00000b6b       0x22 build/startup.o
+ .debug_macro   0x00000b8d       0x56 build/startup.o
+ .debug_macro   0x00000be3       0x6d build/startup.o
+ .debug_macro   0x00000c50      0x103 build/startup.o
+ .debug_macro   0x00000d53       0x6a build/startup.o
+ .debug_macro   0x00000dbd      0x1d0 build/startup.o
+ .debug_macro   0x00000f8d       0x84 build/main_led.o
+ .debug_macro   0x00001011      0x13c build/main_led.o
+
+.debug_line     0x00000000      0x757
+ .debug_line    0x00000000      0x2a6 build/startup.o
+ .debug_line    0x000002a6      0x4b1 build/main_led.o
+
+.debug_str      0x00000000     0x43a1
+ .debug_str     0x00000000     0x43a1 build/startup.o
+                               0x3ea6 (size before relaxing)
+ .debug_str     0x000043a1        0x0 build/main_led.o
+                               0x4473 (size before relaxing)
+
+.comment        0x00000000       0x46
+ .comment       0x00000000       0x46 build/startup.o
+                                 0x47 (size before relaxing)
+ .comment       0x00000046        0x0 build/main_led.o
+                                 0x47 (size before relaxing)
+
+.debug_frame    0x00000000       0x68
+ .debug_frame   0x00000000       0x38 build/startup.o
+ .debug_frame   0x00000038       0x30 build/main_led.o
+
+Cross Reference Table
+
+Symbol                                            File
+BusFault_Handler                                  build/startup.o
+DebugMon_Handler                                  build/startup.o
+Default_Handler                                   build/startup.o
+HardFault_Handler                                 build/startup.o
+MemManage_Handler                                 build/startup.o
+NMI_Handler                                       build/startup.o
+PendSV_Handler                                    build/startup.o
+Reset_Handler                                     build/startup.o
+SVC_Handler                                       build/startup.o
+SysTick_Handler                                   build/startup.o
+UsageFault_Handler                                build/startup.o
+_ebss                                             build/startup.o
+_edata                                            build/startup.o
+_estack                                           build/startup.o
+_sbss                                             build/startup.o
+_sdata                                            build/startup.o
+_sidata                                           build/startup.o
+g_pfnVectors                                      build/startup.o
+main                                              build/main_led.o
+                                                  build/startup.o
